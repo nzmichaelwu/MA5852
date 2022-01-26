@@ -131,3 +131,4 @@ dmypy.json
 # Other file types
 *.pdf
 *.pptx
+*.csv
