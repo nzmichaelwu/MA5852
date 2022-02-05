@@ -133,3 +133,7 @@ dmypy.json
 *.pptx
 *.csv
 *.docx
+A2/JCUAlpha.ipynb
+A2/MA5852-MLP-W3.ipynb
+A2/data/
+A2/output
