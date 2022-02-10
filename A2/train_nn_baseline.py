@@ -35,13 +35,13 @@ if __name__ == '__main__':
     model_baseline = tf.keras.models.Sequential()
     model_baseline.add(tf.keras.layers.Dense(58, activation='relu')) # 2/3 of the number of inputs (83) + number of outputs (3, as there are 3 classes) ~ 58
     model_baseline.add(tf.keras.layers.Dense(29, activation='relu')) # half number of neurons as the first hidden layer
-    model_baseline.add(tf.keras.layers.Dense(3, activation='softmax')) # number of neurons at the output layer = number of classes of the target (3)
+    model_baseline.add(tf.keras.layers.Dense(2, activation='sigmoid')) # number of neurons at the output layer = number of classes of the target (2)
 
     if gpu_count > 1:
         model_baseline = multi_gpu_model(model_baseline, gpus=gpu_count)
     
     # compile the model
-    model_baseline.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy", tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
+    model_baseline.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy", tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
     
     with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.local_variables_initializer())
