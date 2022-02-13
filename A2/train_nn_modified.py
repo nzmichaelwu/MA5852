@@ -39,13 +39,13 @@ if __name__ == '__main__':
     model_mod.add(tf.keras.layers.Dropout(0.5))
     model_mod.add(tf.keras.layers.Dense(29, activation='relu')) # half number of neurons as the first hidden layer
     model_mod.add(tf.keras.layers.Dropout(0.5))
-    model_mod.add(tf.keras.layers.Dense(3, activation='softmax')) # number of neurons at the output layer = number of classes of the target (3)
+    model_mod.add(tf.keras.layers.Dense(2, activation='sigmoid')) # number of neurons at the output layer = number of classes of the target (2)
 
     if gpu_count > 1:
         model_mod = multi_gpu_model(model_mod, gpus=gpu_count)
     
     # compile the model
-    model_mod.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy", tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
+    model_mod.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy", tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
     
     # early stopping
     es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
